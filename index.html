@@ -19,6 +19,46 @@
     polaris-chip {
       margin: 16px;
     }
+
+    .card-list{
+      display: flex;
+
+    }
+    .change-background {
+  background-color: red; 
+}
+.duplicate {
+  background-color: orange;
+}
+.delete {
+  background-color: yellow;
+}
+
+.change-image {
+  background-color: cyan;
+}
+.card button:hover {
+  background-color: blue;
+}
+.duplicate:hover::before{
+  content:"🔁 ";
+}
+.change-background:hover::before{
+  content: "🌈";
+}
+.delete:hover::before{
+  content:"🗑️⚠️ ";
+}
+.change-title {
+  background-color: limegreen;
+}
+
+.change-title:hover::before{
+  content:"✏️";
+}
+.change-image:hover::before {
+  content:"🔁";
+}
  
   </style>
   <title>polaris-chip / my-card</title>
@@ -35,6 +75,16 @@
   <polaris-chip title="Grants and donations"></polaris-chip>
 
   <h1>Hunter X Hunter Characters</h1>
+  <button class="duplicate">Duplicate Card</button>
+  <button class="change-background">Change Background</button>
+  <button class="delete">Delete Last Card</button>
+  <button class="change-image">Change Image </button>
+  <button class="change-title"> Change Title</button>
+
+
+  <div class="card-list">
+
+
   <my-card
     title="Gon Freecss!"
     imgsrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-UQ0Dyv4UEl_PrsuAdgPMxfBgGTYM0NC22A&usqp=CAU"
@@ -71,9 +121,36 @@
   buttonLink="https://hunterxhunter.fandom.com/wiki/List_of_Hunter_%C3%97_Hunter_Characters"
   ></my-card>
 
+</div>
+
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
+  
+  <script>
+document.querySelector('.duplicate').addEventListener('click', function(event) {
+  const newCard = document.querySelector('my-card').cloneNode(true);
+  if (document.querySelectorAll('my-card').length < 10) {
+    document.querySelector('.card-list').appendChild(newCard);
+  }
+});
+
+document.querySelector('.change-background').addEventListener('click', function(event) {
+  document.querySelectorAll('my-card').forEach(function(card) {
+    card.shadowRoot.querySelector(".card").classList.toggle('new-background');
+  });
+});
+document.querySelector('.delete').addEventListener('click', function(event) {
+  const cards = document.querySelectorAll('my-card');
+  if (cards.length > 1) {
+    cards[cards.length - 1].remove();
+  }
+});
+
+
+
+    
+  </script>
 </body>
 
 </html>

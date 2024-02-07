@@ -14,8 +14,8 @@ export class MyCard extends LitElement {
   constructor() {
     super();
     this.title = "My card";
-    this.imgsrc ="";
-    this.description ="";
+    this.imgsrc ="https://github.com/elmsln.png";
+    this.description ="Hello world!";
     this.buttonText= "Click me";
     this.buttonLink ="https://hunterxhunter.fandom.com/wiki/List_of_Hunter_%C3%97_Hunter_Characters";
 
@@ -38,6 +38,11 @@ export class MyCard extends LitElement {
   text-align: center;
 }
 
+.card.new-background{
+  background-color: aquamarine;
+}
+
+
 .card button {
   width: 100%;
 }
@@ -55,41 +60,6 @@ export class MyCard extends LitElement {
   .card img {
     height: auto;
   }
-}
-
-.change-background {
-  background-color: red; 
-}
-.duplicate {
-  background-color: orange;
-}
-.delete {
-  background-color: yellow;
-}
-.new-background{
-  background-color:  #9bddff;
-}
-.change-image {
-  background-color: cyan;
-}
-.card button:hover {
-  background-color: blue;
-}
-.duplicate:hover::before{
-  content:"🔁 ";
-}
-.change-background:hover::before{
-  content: "🌈";
-}
-.delete:hover::before{
-  content:"🗑️⚠️ ";
-}
-.change-title {
-  background-color: magenta;
-}
-
-.change-title:hover::before{
-  content:"✏️ ";
 }
     `;
   }
@@ -112,10 +82,7 @@ export class MyCard extends LitElement {
     
     
     
-    
-    
-    
-    
+      
     
     `;
   }
@@ -123,7 +90,7 @@ export class MyCard extends LitElement {
   static get properties() {
     return {
       title: { type: String },
-      imgsrc:{ type: String},
+      imgsrc:{ type: String, reflect: true},
       description: {type: String},
       buttonText: {type: String},
       buttonLink: {type: String},
