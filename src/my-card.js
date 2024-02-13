@@ -74,6 +74,7 @@ display: block;
 
 
   openChanged(e){
+    console.log(e.newState);
     if(e.newState === "open"){
       this.fancy = true;
     }
