@@ -65,6 +65,12 @@
 </head>
 
 <body>
+  <h1>Counter App</h1>
+  <counter-app counter="16" min="10" max="25"></counter-app>
+  <counter-app></counter-app>
+
+
+
   <h1>polaris-chip</h1>
   <!-- this is going to do whatever the tag's defaults are -->
   <polaris-chip></polaris-chip>
@@ -80,6 +86,8 @@
   <button class="delete">Delete Last Card</button>
   <button class="change-image">Change Image </button>
   <button class="change-title"> Change Title</button>
+
+ 
 
 
   <div class="card-list">
@@ -130,9 +138,11 @@
 
 </div>
 
+
   <!-- this is what is bringing in the definition for this tag -->
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
+  <script type="module" src="./src/counter-app.js"></script>
   
   <script>
 document.querySelector('.duplicate').addEventListener('click', function(event) {
@@ -167,5 +177,6 @@ document.querySelector('.change-title').addEventListener('click',function(event)
     
   </script>
 </body>
+ 
 
 </html>

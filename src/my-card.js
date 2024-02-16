@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import "@lrnwebcomponents/meme-maker/meme-maker.js";
 
 /**
  * Now it's your turn. Here's what we need to try and do
@@ -31,7 +32,7 @@ export class MyCard extends LitElement {
   margin: 16px;
   box-sizing: border-box;
   background-color: #F5F5DC; 
-  height: 500px;
+  height: auto;
 }
 :host([fancy]) {
 display: block;
@@ -89,7 +90,9 @@ display: block;
     
     
   <div class="card">
-    <img class="card-image" src="${this.imgsrc}"> 
+  <meme-maker alt="Cat stalking a small toy" image-url="${this.imgsrc}" top-text="I bring you" bottom-text="the death">
+</meme-maker>
+    <!-- <img class="card-image" src="${this.imgsrc}">  -->
     <h2 class="card-title"> ${this.title} </h2>
  <!-- put this in your render method where you had details -->
  <details ?open="${this.fancy}" @toggle="${this.openChanged}">
@@ -129,3 +132,4 @@ display: block;
 }
 
 globalThis.customElements.define(MyCard.tag, MyCard);
+
