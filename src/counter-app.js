@@ -25,6 +25,10 @@ class CounterApp extends LitElement {
     button:hover{
       color: orange;
     }
+    button:focus{
+      outline: none;
+      box-shadow: 10px 5px 5px;
+    }
   `;
 
   static get properties() {
