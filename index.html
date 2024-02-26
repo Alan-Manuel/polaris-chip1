@@ -65,6 +65,29 @@
 </head>
 
 <body>
+ 
+  <div class="alertContainer containerDivider">
+    <h1 style="margin-top: 0;">campus-alerts</h1>
+
+    <campus-alert open sticky urgency="warning" date="February 22, 2023 12:00AM"
+      message="Occaecat laboris incididunt ea labore quis in qui commodo velit cillum et commodo. Dolore consectetur eu eu reprehenderit anim fugiat in nostrud anim magna enim nisi. Mollit est incididunt sint aliqua duis. Deserunt ut velit deserunt fugiat eiusmod. Do incididunt laborum aliqua cupidatat adipisicing fugiat reprehenderit cillum id. Minim minim elit occaecat id velit fugiat ea. Aliqua excepteur ea excepteur cillum esse voluptate non elit laboris laboris esse est sunt incididunt ullamco. <a href='https://www.psu.edu/news' target='_blank'>PENN STATE NEWS</a>"
+      id="element">
+    </campus-alert>
+
+    <campus-alert open urgency="notice" date="February 22, 2023 12:00AM"
+      message="Goal is to visually match the comp as accurately as possible both in colors and accentuated elements. Copying the CSS will not be very helpful bc of the classes / structure they use but you can learn from them, especially for complex usage of ::before support for 3 different 'states' visually. notice (blue), warning (yellow), alert (red) CSS variables to allow overriding the colors associated with status (text, background color for text, background color for sides / date) Should provide support for mobile responsiveness (1st example has b">
+    </campus-alert>
+
+    <campus-alert open urgency="warning" date="February 22, 2023 12:00AM"></campus-alert>
+
+    <campus-alert open urgency="alert"
+      message="No time or date provided with this banner to show the default value of having no time or date :(">
+    </campus-alert>
+
+    
+    </div>
+ 
+ 
   <h1>Counter App</h1>
   <counter-app counter="16" min="10" max="25"></counter-app>
   <counter-app></counter-app>
@@ -143,6 +166,7 @@
   <script type="module" src="./src/polaris-chip.js"></script>
   <script type="module" src="./src/my-card.js"></script>
   <script type="module" src="./src/counter-app.js"></script>
+  <script type="module" src="./src/campus-alert.js"></script>
   
   <script>
 document.querySelector('.duplicate').addEventListener('click', function(event) {
