@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 
-export class CampusAlert extends LitElement {
+ class CampusAlert extends LitElement {
   static get properties() {
     return {
       sticky: { type: Boolean, reflect: true },
@@ -13,7 +13,7 @@ export class CampusAlert extends LitElement {
 
   constructor() {
     super();
-    this.sticky = false;
+    this.sticky = true;
     this.open = true;
     this.urgency = "notice";
     this.message = "SOMETHING IS GOING ON READ THIS FIRST WHILE YOU ARE HERE";
@@ -28,14 +28,25 @@ export class CampusAlert extends LitElement {
         --min-banner-height: 20vh;
         min-height: var(--min-banner-height);
         --color-one: #4102fd;
+        --color-two: yellow;
         --zindex-priority: 900;
         --display-mode: unset;
         --display-mode-opposite: none;
       }
 
       .alertContainer {
-        background-color: var(--color-one);
+        background-color: var(--color-two);
         z-index: var(--z-index-priority);
+      }
+      .alertContainer-wrap:before {
+        content: " ";
+        width: 0;
+        height: 0;
+        position: absolute;
+        bottom: 2 rem;
+        left: -2rem;
+        border-left: 35px solid transparent;
+        border-right: 0px solid transparent;
       }
     `;
   }
