@@ -28,6 +28,7 @@ export class CampusAlert extends LitElement {
       --zindex-priority: 900;
       --display-mode: unset;
       --display-mode-opposite: none;
+      overflow: hidden;
     }
 
     :host([urgency="notice"]) {
@@ -103,7 +104,7 @@ firstUpdated() {
   });
 
   const slotElement = this.shadowRoot.querySelector('#messageSlot');
-  slotElement.innerHTML = this.message;
+  slotElement.textContent = this.message;
 
  localStorage.setItem("state","closed");
 
@@ -123,7 +124,7 @@ firstUpdated() {
 
   render() {
     return html`
-    <div class="alertContainer">
+    <div class="alertContainer" >
       <div class="openTextContainer">
         <span class="openText">
           <button id="openButton" @click="${this.openBanner}">OPEN CAMPUS ALERT!</button>
@@ -154,28 +155,32 @@ firstUpdated() {
 
 
   closeBanner() {
+    if(this.open) {
     this.open = false;
   
    this.style.setProperty('--display-mode', 'none');
-    this.style.setProperty('--min-banner-height', '6vh');
+    this.style.setProperty('--min-banner-height', '15vh');
     this.style.setProperty('--display-mode-opposite', 'flex');
 
     localStorage.setItem("state","closed");
 
     this.shadowRoot.querySelector('#openButton').focus();
   }
+}
 
   openBanner() {
+    if (!this.open) {
     this.open = true;
    
     this.style.setProperty('--display-mode', 'unset');
-    this.style.setProperty('--min-banner-height', '30vh');
+    this.style.setProperty('--min-banner-height', '50vh');
     this.style.setProperty('--display-mode-opposite', 'none');
 
     localStorage.setItem("state","open");
 
     this.shadowRoot.querySelector('#closeButton').focus();
   }
+}
 
   static get properties() {
     return {
