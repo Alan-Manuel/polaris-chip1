@@ -28,7 +28,7 @@ export class CampusAlert extends LitElement {
       --zindex-priority: 900;
       --display-mode: unset;
       --display-mode-opposite: none;
-      overflow: hidden;
+      
     }
 
     :host([urgency="notice"]) {
