@@ -3,6 +3,7 @@ import { LitElement, html, css } from 'lit';
 import { DDD } from "@lrnwebcomponents/d-d-d/d-d-d.js";
 import "@lrnwebcomponents/rpg-character/rpg-character.js";
 
+
 export class haxcmsparty extends DDD {
   
   static get tag() {
@@ -143,7 +144,7 @@ export class haxcmsparty extends DDD {
   }
 
   handleInputChange(e) {
-    this.userInput = e.target.value;
+    this.userInput = e.target.value.replace(/[^a-z0-9]/g, '');
   }
 
   addUser() {
@@ -162,6 +163,7 @@ export class haxcmsparty extends DDD {
     // Optionally dispatch an event to notify parent components
     this.dispatchEvent(new CustomEvent('party-saved', { detail: this.users }));
   }
+  
 
   render() {
     return html`
@@ -198,6 +200,7 @@ export class haxcmsparty extends DDD {
       userInput: { type: String }
     };
   }
+  
 }
 
 customElements.define(haxcmsparty.tag, haxcmsparty);
