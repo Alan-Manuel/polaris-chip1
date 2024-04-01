@@ -73,6 +73,7 @@ export class CampusAlert extends LitElement {
         border-left: 25px solid transparent;
         border-right: 0px solid transparent;
       }
+      .
 
     
   `;
