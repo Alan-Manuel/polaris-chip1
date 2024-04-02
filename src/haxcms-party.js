@@ -22,14 +22,15 @@ export class haxcmsparty extends DDD {
       css`
         .party-container {
           position: relative;
-          border: 1px solid var(--ddd-theme-default-beaver70);
+          border: 10px solid var(--ddd-theme-default-beaver70);
           border-radius: 10px;
           padding: 0px 20px 25px 20px;
-          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: var (--ddd-textShadow-sm);
           max-width: 600px;
           margin: 0 auto;
           width: 100vw;
           height: 48vh;
+          background-color: var(--ddd-theme-default-roarLight);
         }
 
         .add-user-container {
@@ -46,8 +47,8 @@ export class haxcmsparty extends DDD {
           width: calc(100% - 110px);
           margin-right: 10px;
           padding: 8px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
+          border: 1px solid var(--ddd-theme-default-beaver70);
+          border-radius: 10px var( --ddd-radius-sm);
         }
 
         #close-button {
@@ -56,7 +57,7 @@ export class haxcmsparty extends DDD {
           right: 0;
           width: 30px;
           height: 20px;
-          background-color: red;
+          background-color: var(--ddd-theme-default-original87Pink);
           color: white;
           border: none;
           border-radius: 5px;
@@ -65,7 +66,7 @@ export class haxcmsparty extends DDD {
 
         #close-button:hover, #close-button:focus {
           transition: ease 0.3s;
-          background-color: #c00000;
+          background-color: var(--ddd-theme-default-discoveryCoral) ;
         }
 
         #add-button {
@@ -74,14 +75,14 @@ export class haxcmsparty extends DDD {
           padding: 8.5px 30px;
           border: none;
           border-radius: 5px;
-          background-color: #007bff;
+          background-color: var(--ddd-theme-default-skyBlue);
           color: #fff;
           cursor: pointer;
         }
 
         #add-button:hover, #add-button:focus {
           transition: ease 0.3s;
-          background-color: #005ec2;
+          background-color: var(--ddd-theme-default-pughBlue);
         }
 
         .current-user-container {
@@ -97,14 +98,15 @@ export class haxcmsparty extends DDD {
 
         .card-container {
           display: inline-flex;
+          flex-direction: column;
           align-items: center;
           vertical-align: top;
           height: auto;
           width: auto;
-          margin-right: 10px;
-          padding: 10px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
+          margin-right: 2.5px;
+          padding: 2.5px;
+          border: 1px solid var(--ddd-theme-default-slateMaxLight);
+          border-radius: 5px var( --ddd-radius-sm);
           background-color: #f9f9f9;
         }
 
@@ -115,7 +117,7 @@ export class haxcmsparty extends DDD {
         .card-container button {
           background-color: #f9f9f9;
           border: none;
-          border-radius: 5px;
+          border-radius: 10px var( --ddd-radius-sm);
           cursor: pointer;
         }
 
@@ -128,7 +130,7 @@ export class haxcmsparty extends DDD {
           position: relative;
           padding: 10px;
           width: 100%;
-          background-color: #28a745;
+          background-color: var(--ddd-theme-default-opportunityGreen);
           color: #fff;
           border: none;
           border-radius: 5px;
@@ -137,7 +139,7 @@ export class haxcmsparty extends DDD {
 
         #save-button:hover, #save-button:focus {
           transition: ease 0.3s;
-          background-color: #1b6c2e;
+          background-color: var(--ddd-theme-default-discoveryCoral);
         }
       `
     ];
@@ -149,7 +151,8 @@ export class haxcmsparty extends DDD {
 
   addUser() {
     if (this.userInput.trim() !== '') {
-      this.users = [...this.users, this.userInput];
+      // this.users = [...this.users, this.userInput];
+      this.users.push(this.userInput);
       this.userInput = '';
     }
   }
@@ -160,13 +163,25 @@ export class haxcmsparty extends DDD {
 
   saveParty() {
     console.log('Party saved:', this.users);
-    // Optionally dispatch an event to notify parent components
-    this.dispatchEvent(new CustomEvent('party-saved', { detail: this.users }));
+    if (this.users.length === 0) {
+      alert('Saved the party with no users');
+    } else if (this.users.length === 1) {
+      alert(`Saving party with user: ${this.users}`);
+    } else if (this.users.length === 2) {
+      alert(`Saving party with users: ${this.users.join(' and ')}`);
+    } else {
+      const usersExceptLast = this.users.slice(0, -1).join(', ');
+      const lastUser = this.users[this.users.length - 1];
+      alert(`Saving party with users: ${usersExceptLast}, and ${lastUser}`);
+    }
+    this.makeItRain();  
   }
+  
   
 
   render() {
     return html`
+      <confetti-container id ='confetti'>
       <div class="party-container">
         <div class="add-user-container">
           <p><span>Add User:</span></p>
@@ -177,9 +192,9 @@ export class haxcmsparty extends DDD {
         <div class="current-user-container">
           <p><span>Current Users:</span></p>        
           <div class="scroll-container">
-            <div class="card-container">
+            <div >
               ${this.users.map((user, index) => html`
-                <div>
+                <div class="card-container">
                   <rpg-character></rpg-character>
                   <p>${user}</p>
                   <button @click="${() => this.removeUser(index)}">Remove User</button>
@@ -190,8 +205,17 @@ export class haxcmsparty extends DDD {
         </div>
         <button id="save-button" @click="${this.saveParty}">Save Party</button>
       </div>
+      </confetti-container>
     `;
   }
+  makeItRain() {
+    import('@lrnwebcomponents/multiple-choice/lib/confetti-container.js').then((module) => {
+      setTimeout(() => {
+        this.shadowRoot.querySelector("#confetti").setAttribute("popped", "");
+      }, 0);
+    });
+  }
+
 
   static get properties() {
     return {
