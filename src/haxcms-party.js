@@ -14,6 +14,7 @@ export class haxcmsparty extends DDD {
     super();
     this.users = [];
     this.userInput = '';
+  
   }
 
   static get styles() {
@@ -152,8 +153,14 @@ export class haxcmsparty extends DDD {
   addUser() {
     if (this.userInput.trim() !== '') {
       // this.users = [...this.users, this.userInput];
+      const isExistingUser = this.users.includes(this.userInput);
+      if(isExistingUser) {
+        alert('Username already exists!');
+      } else {
       this.users.push(this.userInput);
       this.userInput = '';
+        
+      }  
     }
   }
 
@@ -193,7 +200,7 @@ export class haxcmsparty extends DDD {
           <p><span>Current Users:</span></p>        
           <div class="scroll-container">
             <div >
-              ${this.users.map((user, index) => html`
+                 ${this.users.map((user, index) => html`
                 <div class="card-container">
                   <rpg-character></rpg-character>
                   <p>${user}</p>
